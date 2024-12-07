@@ -8,6 +8,7 @@ class GameObject {
   int h; //Size
 
   PImage image;
+  int direction;
 
   //Constructor - Builds the object
   GameObject(int startX, int startY, int startW, int startH) {
@@ -41,20 +42,20 @@ class GameObject {
 
   void move() {
     
-    if (onHorizontalRoad() == true) {
-      if (keyCode == 39) { //RIGHT
+    if (onHorizontalRoad(this) == true) {
+      if (direction == 39) { //RIGHT
         x = x + 10;
       }
-      if (keyCode == 37) { //LEFT
+      if (direction == 37) { //LEFT
         x = x - 10;
       }
     }
 
-    if (onVerticalRoad() == true) {
-      if (keyCode == 38) { //UP
+    if (onVerticalRoad(this) == true) {
+      if (direction == 38) { //UP
         y = y - 10;
       }
-      if (keyCode == 40) { //DOWN
+      if (direction == 40) { //DOWN
         y = y + 10;
       }
     }
@@ -76,4 +77,13 @@ class GameObject {
       image = playerImageDown;
     }
   }
+  
+  //-------------------Enemy picking a direction--
+  void pickADirection()
+  {
+    direction = (int)random(37, 41);
+  }
+  
+  
+  
 } //NO CODE BELOW HERE

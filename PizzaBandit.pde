@@ -20,6 +20,7 @@ void setup() {
   background(backgroundImage);
   loadPlayer();
   loadRoads();
+  loadEnemies();
 }
 
 void loadRoads() {
@@ -48,6 +49,10 @@ void loadEnemies() {
   for (int i = 0; i < 4; i++) {
     enemies[i].image = enemyImage;
   }
+  enemies[0].pickADirection();
+  enemies[1].pickADirection();
+  enemies[2].pickADirection();
+  enemies[3].pickADirection();
 }
 
 void loadPlayer() {
@@ -72,7 +77,15 @@ void draw() {
   player.move();
   player.animate();
   player.display();
+  enemies[0].display();
+  enemies[1].display();
+  enemies[2].display();
+  enemies[3].display();
   
+  enemies[0].move();
+  enemies[1].move();
+  enemies[2].move();
+  enemies[3].move();
   
   
 }
@@ -94,10 +107,10 @@ void lockToRoad() {
   
 }
 
-boolean onVerticalRoad() {
+boolean onVerticalRoad(GameObject item) {
   
   for (int i = 2; i < 6; i++) {
-    if ( overlaps(player, roads[i]) == true ) {
+    if ( overlaps(item, roads[i]) == true ) {
       return true;
     }
   }
@@ -105,10 +118,10 @@ boolean onVerticalRoad() {
   return false;
 }
 
-boolean onHorizontalRoad() {
+boolean onHorizontalRoad(GameObject item) {
   
   for (int i = 0; i < 2; i++) {
-    if ( overlaps(player, roads[i]) == true ) {
+    if ( overlaps(item, roads[i]) == true ) {
       return true;
     }
   }
@@ -129,6 +142,20 @@ boolean overlaps(GameObject A, GameObject B) {
 void keyPressed() {
   println(keyCode);
   lockToRoad();
+  
+  if (keyCode == LEFT){
+    player.direction = 37;
+  }
+  if (keyCode == UP){
+    player.direction = 38;
+  }
+  if (keyCode == RIGHT){
+    player.direction = 39;
+  }
+  if (keyCode == DOWN){
+    player.direction = 40;
+  }
+  
 }
 
 void displayRoads()
